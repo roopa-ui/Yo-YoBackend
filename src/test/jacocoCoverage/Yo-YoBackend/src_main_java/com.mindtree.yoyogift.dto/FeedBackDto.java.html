@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FeedBackDto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.dto</a> &gt; <span class="el_source">FeedBackDto.java</span></div><h1>FeedBackDto.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.dto;
+
+
+
+import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mindtree.yoyogift.entity.User;
+
+public class FeedBackDto {
+	private int feedbackId;
+	@Range(min=1,max=5)
+	private int feedbackStarRating;
+	private String feedbackComment;
+	@JsonIgnore
+	private ProductDto product;
+	
+	private UserDto user;
+	public FeedBackDto(int feedbackId, int feedbackStarRating, String feedbackComment, ProductDto product, UserDto user) {
+<span class="fc" id="L20">		super();</span>
+<span class="fc" id="L21">		this.feedbackId = feedbackId;</span>
+<span class="fc" id="L22">		this.feedbackStarRating = feedbackStarRating;</span>
+<span class="fc" id="L23">		this.feedbackComment = feedbackComment;</span>
+<span class="fc" id="L24">		this.product = product;</span>
+<span class="fc" id="L25">		this.user = user;</span>
+<span class="fc" id="L26">	}</span>
+	public FeedBackDto() {
+<span class="fc" id="L28">		super();</span>
+<span class="fc" id="L29">	}</span>
+	public int getFeedbackId() {
+<span class="fc" id="L31">		return feedbackId;</span>
+	}
+	public void setFeedbackId(int feedbackId) {
+<span class="fc" id="L34">		this.feedbackId = feedbackId;</span>
+<span class="fc" id="L35">	}</span>
+	public int getFeedbackStarRating() {
+<span class="fc" id="L37">		return feedbackStarRating;</span>
+	}
+	public void setFeedbackStarRating(int feedbackStarRating) {
+<span class="fc" id="L40">		this.feedbackStarRating = feedbackStarRating;</span>
+<span class="fc" id="L41">	}</span>
+	public String getFeedbackComment() {
+<span class="fc" id="L43">		return feedbackComment;</span>
+	}
+	public void setFeedbackComment(String feedbackComment) {
+<span class="fc" id="L46">		this.feedbackComment = feedbackComment;</span>
+<span class="fc" id="L47">	}</span>
+	public ProductDto getProduct() {
+<span class="fc" id="L49">		return product;</span>
+	}
+	public void setProduct(ProductDto product) {
+<span class="fc" id="L52">		this.product = product;</span>
+<span class="fc" id="L53">	}</span>
+	public UserDto getUser() {
+<span class="fc" id="L55">		return user;</span>
+	}
+	public void setUser(UserDto user) {
+<span class="fc" id="L58">		this.user = user;</span>
+<span class="fc" id="L59">	}</span>
+	@Override
+	public String toString() {
+<span class="fc" id="L62">		return &quot;FeedBackDto [feedbackId=&quot; + feedbackId + &quot;, feedbackStarRating=&quot; + feedbackStarRating</span>
+<span class="fc" id="L63">				+ &quot;, feedbackComment=&quot; + feedbackComment + &quot;, product=&quot; + product + &quot;, user=&quot; + user + &quot;]&quot;;</span>
+	}
+	@Override
+	public int hashCode() {
+<span class="nc" id="L67">		final int prime = 31;</span>
+<span class="nc" id="L68">		int result = 1;</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		result = prime * result + ((feedbackComment == null) ? 0 : feedbackComment.hashCode());</span>
+<span class="nc" id="L70">		result = prime * result + feedbackId;</span>
+<span class="nc" id="L71">		result = prime * result + feedbackStarRating;</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		result = prime * result + ((product == null) ? 0 : product.hashCode());</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">		result = prime * result + ((user == null) ? 0 : user.hashCode());</span>
+<span class="nc" id="L74">		return result;</span>
+	}
+	@Override
+	public boolean equals(Object obj) {
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L79">			return true;</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L81">			return false;</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L83">			return false;</span>
+<span class="fc" id="L84">		FeedBackDto other = (FeedBackDto) obj;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">		if (feedbackComment == null) {</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">			if (other.feedbackComment != null)</span>
+<span class="nc" id="L87">				return false;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">		} else if (!feedbackComment.equals(other.feedbackComment))</span>
+<span class="nc" id="L89">			return false;</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">		if (feedbackId != other.feedbackId)</span>
+<span class="nc" id="L91">			return false;</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">		if (feedbackStarRating != other.feedbackStarRating)</span>
+<span class="nc" id="L93">			return false;</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">		if (product == null) {</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">			if (other.product != null)</span>
+<span class="nc" id="L96">				return false;</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		} else if (!product.equals(other.product))</span>
+<span class="fc" id="L98">			return false;</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">		if (user == null) {</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">			if (other.user != null)</span>
+<span class="nc" id="L101">				return false;</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">		} else if (!user.equals(other.user))</span>
+<span class="nc" id="L103">			return false;</span>
+<span class="fc" id="L104">		return true;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

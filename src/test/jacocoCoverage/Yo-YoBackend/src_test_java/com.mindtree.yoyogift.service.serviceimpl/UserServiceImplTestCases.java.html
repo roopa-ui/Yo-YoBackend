@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserServiceImplTestCases.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.service.serviceimpl</a> &gt; <span class="el_source">UserServiceImplTestCases.java</span></div><h1>UserServiceImplTestCases.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.service.serviceimpl;
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.mindtree.yoyogift.dto.UserDto;
+import com.mindtree.yoyogift.entity.User;
+import com.mindtree.yoyogift.exception.serviceexception.YoYoGiftServiceException;
+import com.mindtree.yoyogift.repository.FeedBackRepository;
+import com.mindtree.yoyogift.repository.GiftRepository;
+import com.mindtree.yoyogift.repository.UserRepository;
+import com.mindtree.yoyogift.service.UserService;
+
+@RunWith(SpringRunner.class)
+<span class="fc" id="L27">public class UserServiceImplTestCases {</span>
+
+	@org.springframework.boot.test.context.TestConfiguration
+<span class="fc" id="L30">	public static class TestConfiguration {</span>
+
+		@Bean
+		public UserService service() {
+<span class="fc" id="L34">			return new UserServiceImpl();</span>
+		}
+	}
+
+	@Autowired
+	UserService userService;
+
+	@MockBean
+	UserRepository userRepository;
+
+	@MockBean
+	GiftRepository giftRepository;
+
+	@MockBean
+	FeedBackRepository feedbackRepository;
+
+//	@Before
+//	public void setUp() {
+//
+//	}
+
+//	@Test
+//	void testGetUser() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+
+//	@Test
+//	void testGetReceivedGifts() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+//
+//	@Test
+//	void testGetSentGifts() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+//
+//	@Test
+//	void testUpdateYoyoBalance() {
+//	}
+//
+//	@Test
+//	void testGetOrders() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+//
+//	@Test
+//	void testGetGifts() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+
+	@Test
+	public void testInsertUserToDB() throws YoYoGiftServiceException {
+<span class="fc" id="L86">		List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">		for (int i = 1; i &lt; 4; i++) {</span>
+<span class="fc" id="L88">			User user = new User(45 + i, &quot;Jay&quot; + i, &quot;jay@gmail.com&quot; + i, &quot;Jay12345&quot; + i, i);</span>
+<span class="fc" id="L89">			users.add(user);</span>
+		}
+<span class="fc" id="L91">		User user = new User(39, &quot;Kim&quot;, &quot;kim@gmail,com&quot;, &quot;Kim12345&quot;, 0);</span>
+<span class="fc" id="L92">		UserDto userDto = new UserDto(39, &quot;Kim&quot;, &quot;kim@gmail,com&quot;, &quot;Kim12345&quot;, 0);</span>
+<span class="fc" id="L93">		System.out.println(users.size());</span>
+<span class="fc" id="L94">		Mockito.when(userRepository.findAll()).thenReturn(users);</span>
+<span class="fc" id="L95">		Mockito.when(userRepository.save(user)).thenReturn(user);</span>
+<span class="fc" id="L96">		assertEquals(userService.insertUserToDB(userDto), true);</span>
+<span class="fc" id="L97">	}</span>
+
+	@Test
+	public void testLoginUserFromDB() throws YoYoGiftServiceException {
+<span class="fc" id="L101">		String mailId = &quot;jay@gmail.com&quot;;</span>
+<span class="fc" id="L102">		String passWord = &quot;Jay12345&quot;;</span>
+<span class="fc" id="L103">		List&lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		for (int i = 1; i &lt; 4; i++) {</span>
+<span class="fc" id="L105">			User user = new User();</span>
+<span class="fc" id="L106">			user.setMailId(mailId);</span>
+<span class="fc" id="L107">			user.setPassWord(&quot;81531e0febfb870ed5f7378c9a1a73de2c207322&quot;);</span>
+<span class="fc" id="L108">			users.add(user);</span>
+		}
+<span class="fc" id="L110">		System.out.println(users.size());</span>
+<span class="fc" id="L111">		Mockito.when(userRepository.findAll()).thenReturn(users);</span>
+<span class="fc" id="L112">		assertEquals(userService.loginUserFromDB(mailId,passWord),true);</span>
+
+<span class="fc" id="L114">	}</span>
+////
+//	@Test
+//	void testEncryptThisString() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+//
+//	@Test
+//	void testGetYoyoBalance() {
+//		fail(&quot;Not yet implemented&quot;);
+//	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

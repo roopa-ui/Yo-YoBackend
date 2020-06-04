@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ControllerExceptionHandler.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.controller.handler</a> &gt; <span class="el_source">ControllerExceptionHandler.java</span></div><h1>ControllerExceptionHandler.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.controller.handler;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.mindtree.yoyogift.controller.FeedBackController;
+import com.mindtree.yoyogift.controller.GiftController;
+import com.mindtree.yoyogift.controller.ProductController;
+import com.mindtree.yoyogift.controller.UserController;
+import com.mindtree.yoyogift.dto.ErrorDto;
+import com.mindtree.yoyogift.dto.ResponseDto;
+import com.mindtree.yoyogift.exception.YoYoGiftApplicationException;
+
+
+@RestControllerAdvice(assignableTypes= {ProductController.class,FeedBackController.class,GiftController.class,UserController.class})
+<span class="nc" id="L18">public class ControllerExceptionHandler {</span>
+	@ExceptionHandler(YoYoGiftApplicationException.class)
+	public ResponseEntity&lt;ResponseDto&gt; YoYoGiftApplicationExceptionHandler(Exception e,Throwable cause) {
+<span class="nc" id="L21">		ResponseDto response = new ResponseDto(null,new ErrorDto(e.getMessage(),e.getCause()),&quot;Exception Occured&quot;,false);</span>
+<span class="nc" id="L22">		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);</span>
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

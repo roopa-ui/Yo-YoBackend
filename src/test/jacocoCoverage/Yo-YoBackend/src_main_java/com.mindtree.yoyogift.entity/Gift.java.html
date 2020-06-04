@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Gift.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.entity</a> &gt; <span class="el_source">Gift.java</span></div><h1>Gift.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.entity;
+
+import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mindtree.yoyogift.dto.ProductDto;
+
+@Entity
+public class Gift {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int giftId;
+	private String redeemCode;
+	private boolean status;
+	private LocalDate giftDate;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Product product;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User sentGiftUser;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User receivedGiftUser;
+
+	public Gift(int giftId, String redeemCode, boolean status, LocalDate giftDate, Product product, User sentGiftUser,
+			User receiveGiftUser) {
+<span class="fc" id="L32">		super();</span>
+<span class="fc" id="L33">		this.giftId = giftId;</span>
+<span class="fc" id="L34">		this.redeemCode = redeemCode;</span>
+<span class="fc" id="L35">		this.status = status;</span>
+<span class="fc" id="L36">		this.giftDate = giftDate;</span>
+<span class="fc" id="L37">		this.product = product;</span>
+<span class="fc" id="L38">		this.sentGiftUser = sentGiftUser;</span>
+<span class="fc" id="L39">		this.receivedGiftUser = receiveGiftUser;</span>
+<span class="fc" id="L40">	}</span>
+
+	public Gift() {
+<span class="fc" id="L43">		super();</span>
+<span class="fc" id="L44">	}</span>
+
+	public int getGiftId() {
+<span class="fc" id="L47">		return giftId;</span>
+	}
+
+	public void setGiftId(int giftId) {
+<span class="nc" id="L51">		this.giftId = giftId;</span>
+<span class="nc" id="L52">	}</span>
+
+	public String getRedeemCode() {
+<span class="fc" id="L55">		return redeemCode;</span>
+	}
+
+	public void setRedeemCode(String redeemCode) {
+<span class="nc" id="L59">		this.redeemCode = redeemCode;</span>
+<span class="nc" id="L60">	}</span>
+
+	public boolean isStatus() {
+<span class="fc" id="L63">		return status;</span>
+	}
+
+	public void setStatus(boolean status) {
+<span class="fc" id="L67">		this.status = status;</span>
+<span class="fc" id="L68">	}</span>
+
+	public LocalDate getGiftDate() {
+<span class="fc" id="L71">		return giftDate;</span>
+	}
+
+	public void setGiftDate(LocalDate giftDate) {
+<span class="nc" id="L75">		this.giftDate = giftDate;</span>
+<span class="nc" id="L76">	}</span>
+
+	public Product getProduct() {
+<span class="fc" id="L79">		return product;</span>
+	}
+
+	public void setProduct(Product product) {
+<span class="nc" id="L83">		this.product = product;</span>
+<span class="nc" id="L84">	}</span>
+
+	public User getSentGiftUser() {
+<span class="fc" id="L87">		return sentGiftUser;</span>
+	}
+
+	public void setSentGiftUser(User sentGiftUser) {
+<span class="nc" id="L91">		this.sentGiftUser = sentGiftUser;</span>
+<span class="nc" id="L92">	}</span>
+
+	public User getReceiveGiftUser() {
+<span class="fc" id="L95">		return receivedGiftUser;</span>
+	}
+
+	public void setReceiveGiftUser(User receiveGiftUser) {
+<span class="fc" id="L99">		this.receivedGiftUser = receiveGiftUser;</span>
+<span class="fc" id="L100">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L104">		final int prime = 31;</span>
+<span class="nc" id="L105">		int result = 1;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">		result = prime * result + ((giftDate == null) ? 0 : giftDate.hashCode());</span>
+<span class="nc" id="L107">		result = prime * result + giftId;</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">		result = prime * result + ((product == null) ? 0 : product.hashCode());</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">		result = prime * result + ((receivedGiftUser == null) ? 0 : receivedGiftUser.hashCode());</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">		result = prime * result + ((redeemCode == null) ? 0 : redeemCode.hashCode());</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">		result = prime * result + ((sentGiftUser == null) ? 0 : sentGiftUser.hashCode());</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">		result = prime * result + (status ? 1231 : 1237);</span>
+<span class="nc" id="L113">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L119">			return true;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L121">			return false;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L123">			return false;</span>
+<span class="nc" id="L124">		Gift other = (Gift) obj;</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		if (giftDate == null) {</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">			if (other.giftDate != null)</span>
+<span class="nc" id="L127">				return false;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		} else if (!giftDate.equals(other.giftDate))</span>
+<span class="nc" id="L129">			return false;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		if (giftId != other.giftId)</span>
+<span class="nc" id="L131">			return false;</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		if (product == null) {</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">			if (other.product != null)</span>
+<span class="nc" id="L134">				return false;</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">		} else if (!product.equals(other.product))</span>
+<span class="nc" id="L136">			return false;</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if (receivedGiftUser == null) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">			if (other.receivedGiftUser != null)</span>
+<span class="nc" id="L139">				return false;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">		} else if (!receivedGiftUser.equals(other.receivedGiftUser))</span>
+<span class="nc" id="L141">			return false;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">		if (redeemCode == null) {</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">			if (other.redeemCode != null)</span>
+<span class="nc" id="L144">				return false;</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">		} else if (!redeemCode.equals(other.redeemCode))</span>
+<span class="nc" id="L146">			return false;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">		if (sentGiftUser == null) {</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">			if (other.sentGiftUser != null)</span>
+<span class="nc" id="L149">				return false;</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">		} else if (!sentGiftUser.equals(other.sentGiftUser))</span>
+<span class="nc" id="L151">			return false;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">		if (status != other.status)</span>
+<span class="nc" id="L153">			return false;</span>
+<span class="nc" id="L154">		return true;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

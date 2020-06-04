@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserControllerTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.controller</a> &gt; <span class="el_source">UserControllerTest.java</span></div><h1>UserControllerTest.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.controller;
+
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mindtree.yoyogift.dto.FeedBackDto;
+import com.mindtree.yoyogift.dto.MyGifts;
+import com.mindtree.yoyogift.dto.MyOrder;
+import com.mindtree.yoyogift.dto.ProductDto;
+import com.mindtree.yoyogift.dto.UserDto;
+import com.mindtree.yoyogift.entity.FeedBack;
+import com.mindtree.yoyogift.entity.Product;
+import com.mindtree.yoyogift.service.UserService;
+@RunWith(MockitoJUnitRunner.Silent.class)
+@WebMvcTest(UserController.class)
+<span class="fc" id="L36">public class UserControllerTest {</span>
+
+	@InjectMocks
+	private UserController userController;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Mock
+	private UserService userService;
+
+	@Before
+	public void setup() {
+<span class="fc" id="L49">		this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();</span>
+<span class="fc" id="L50">	}</span>
+
+	@Test
+	public void testUser() throws Exception {
+<span class="fc" id="L54">		String userEmail = &quot;gayathri@gmail.com&quot;;</span>
+<span class="fc" id="L55">		UserDto userDto = new UserDto(1, &quot;gayathri&quot;, &quot;gayathri@gmail.com&quot;, &quot;gayathri1234&quot;, 300);</span>
+<span class="fc" id="L56">		when(userService.getUser(userEmail)).thenReturn(userDto);</span>
+<span class="fc" id="L57">		mockMvc.perform(MockMvcRequestBuilders.get(&quot;/user/get-user/userEmail&quot;).accept(MediaType.APPLICATION_JSON))</span>
+<span class="fc" id="L58">				.andExpect(MockMvcResultMatchers.status().isOk());</span>
+
+<span class="fc" id="L60">	}</span>
+	@Test
+	public void testGetBalance() throws Exception {
+<span class="fc" id="L63">		String userEmail = &quot;gayathri@gmail.com&quot;;</span>
+<span class="fc" id="L64">		UserDto userDto = new UserDto(1, &quot;gayathri&quot;, &quot;gayathri@gmail.com&quot;, &quot;gayathri1234&quot;, 300);</span>
+<span class="fc" id="L65">		when(userService.getYoyoBalance(userEmail)).thenReturn(300);</span>
+<span class="fc" id="L66">		mockMvc.perform(MockMvcRequestBuilders.get(&quot;/user/get-yoyo-balance/userEmail&quot;).accept(MediaType.APPLICATION_JSON))</span>
+<span class="fc" id="L67">				.andExpect(MockMvcResultMatchers.status().isOk());</span>
+
+<span class="fc" id="L69">	}</span>
+	@Test
+	public void testUpdateYoyoBalance() throws Exception {
+<span class="fc" id="L72">		String userEmail = &quot;gayathri@gmail.com&quot;;</span>
+<span class="fc" id="L73">		UserDto userDto = new UserDto(1, &quot;gayathri&quot;, &quot;gayathri@gmail.com&quot;, &quot;gayathri1234&quot;, 200);</span>
+<span class="fc" id="L74">		when(userService.updateYoyoBalance(userEmail, 200)).thenReturn(userDto);</span>
+<span class="fc" id="L75">		mockMvc.perform(MockMvcRequestBuilders.put(&quot;/user/update-yoyo-balance/userEmail/200&quot;)</span>
+<span class="fc" id="L76">				.accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());</span>
+
+<span class="fc" id="L78">	}</span>
+
+	@Test
+	public void testGetGifts() throws Exception {
+<span class="fc" id="L82">		String userEmail = &quot;gayathri@gmail.com&quot;;</span>
+<span class="fc" id="L83">		UserDto userDto = new UserDto(1, &quot;gayathri&quot;, &quot;gayathri@gmail.com&quot;, &quot;gayathri1234&quot;, 300);</span>
+<span class="fc" id="L84">		List&lt;MyGifts&gt; giftDtos = new ArrayList&lt;MyGifts&gt;();</span>
+<span class="fc" id="L85">		Product product = new Product(1, &quot;dress&quot;, 100, &quot;jeans&quot;, &quot;wrangler&quot;, &quot;abc.jpeg&quot;, null, null);</span>
+<span class="fc" id="L86">		ProductDto product1 = new ProductDto(1, &quot;dress&quot;, 100, &quot;jeans&quot;, &quot;wrangler&quot;, &quot;abc.jpeg&quot;, null, null);</span>
+
+<span class="fc" id="L88">		Optional&lt;FeedBack&gt; feedBack = Optional.ofNullable(new FeedBack(1, 3, &quot;good&quot;, product));</span>
+<span class="fc" id="L89">		FeedBackDto feed = new FeedBackDto(1,3,&quot;good&quot;,product1,userDto);</span>
+
+<span class="fc" id="L91">		giftDtos.add(new MyGifts(1, null, 1, &quot;abc.jpeg&quot;, &quot;dress&quot;, userDto.getUserName(),feed));</span>
+<span class="fc" id="L92">		when(userService.getGifts(userEmail)).thenReturn(giftDtos);</span>
+<span class="fc" id="L93">		mockMvc.perform(MockMvcRequestBuilders.get(&quot;/user/getgifts/userEmail&quot;)</span>
+<span class="fc" id="L94">				.accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());</span>
+
+<span class="fc" id="L96">	}</span>
+	@Test
+	public void testGetorders() throws Exception {
+<span class="fc" id="L99">		String userEmail = &quot;gayathri@gmail.com&quot;;</span>
+<span class="fc" id="L100">		List&lt;MyOrder&gt; sentGiftDto = new ArrayList&lt;MyOrder&gt;();</span>
+<span class="fc" id="L101">		Product product = new Product(1, &quot;dress&quot;, 100, &quot;jeans&quot;, &quot;wrangler&quot;, &quot;abc.jpeg&quot;, null, null);</span>
+<span class="fc" id="L102">		ProductDto product1 = new ProductDto(1, &quot;dress&quot;, 100, &quot;jeans&quot;, &quot;wrangler&quot;, &quot;abc.jpeg&quot;, null, null);</span>
+<span class="fc" id="L103">		Optional&lt;FeedBack&gt; feedBack = Optional.ofNullable(new FeedBack(1, 3, &quot;good&quot;, product));</span>
+<span class="fc" id="L104">		UserDto userDto = new UserDto(1, &quot;gayathri&quot;, &quot;gayathri@gmail.com&quot;, &quot;gayathri1234&quot;, 100);</span>
+<span class="fc" id="L105">		FeedBackDto feed = new FeedBackDto(1,3,&quot;good&quot;,product1,userDto);</span>
+
+<span class="fc" id="L107">		sentGiftDto.add(new MyOrder(1, null, 1, &quot;abc.jpeg&quot;, &quot;dress&quot;, 100, feed, userDto.getUserName()));</span>
+<span class="fc" id="L108">		when(userService.getOrders(userEmail)).thenReturn(sentGiftDto);</span>
+<span class="fc" id="L109">		mockMvc.perform(MockMvcRequestBuilders.get(&quot;/user/getorders/userEmail&quot;)</span>
+<span class="fc" id="L110">				.accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());</span>
+
+<span class="fc" id="L112">	}</span>
+	public static String asJsonString(final Object obj) {
+		try {
+<span class="fc" id="L115">			return new ObjectMapper().writeValueAsString(obj);</span>
+<span class="nc" id="L116">		} catch (JsonProcessingException e) {</span>
+<span class="nc" id="L117">			throw new RuntimeException();</span>
+		}
+
+	}
+
+	
+	@Test
+	public void insertUserToServiceTest() throws Exception {
+
+<span class="fc" id="L126">		UserDto user = new UserDto();</span>
+<span class="fc" id="L127">		user.setUserName(&quot;john&quot;);</span>
+<span class="fc" id="L128">		user.setMailId(&quot;john123@gmail.com&quot;);</span>
+<span class="fc" id="L129">		user.setPassWord(&quot;john123&quot;);</span>
+<span class="fc" id="L130">		Mockito.when(userService.insertUserToDB(Mockito.refEq(user))).thenReturn(true);</span>
+<span class="fc" id="L131">		mockMvc.perform(MockMvcRequestBuilders.post(&quot;/user/register-user&quot;).contentType(MediaType.APPLICATION_JSON)</span>
+<span class="fc" id="L132">				.content(asJsonString(user)).accept(MediaType.APPLICATION_JSON))</span>
+<span class="fc" id="L133">				.andExpect(MockMvcResultMatchers.status().isOk());</span>
+<span class="fc" id="L134">	}</span>
+
+	@Test
+	public void loginUserToServiceTest() throws Exception {
+
+<span class="fc" id="L139">		String mailId = &quot;john123@gmail.com&quot;;</span>
+<span class="fc" id="L140">		String passWord = &quot;john123&quot;;</span>
+<span class="fc" id="L141">		Mockito.when(userService.loginUserFromDB(mailId, passWord)).thenReturn(true);</span>
+<span class="fc" id="L142">		mockMvc.perform(MockMvcRequestBuilders.get(&quot;/user/login/john123@gmail.com/john123&quot;)</span>
+<span class="fc" id="L143">				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))</span>
+<span class="fc" id="L144">				.andExpect(MockMvcResultMatchers.status().isOk());</span>
+
+<span class="fc" id="L146">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

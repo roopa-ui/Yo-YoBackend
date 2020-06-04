@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CategoryDto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.dto</a> &gt; <span class="el_source">CategoryDto.java</span></div><h1>CategoryDto.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.dto;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public class CategoryDto {
+	private int categoryId;
+	private String categoryName;
+	@JsonIgnore
+	private List&lt;ProductDto&gt; productList;
+	public CategoryDto(int categoryId, String categoryName, List&lt;ProductDto&gt; productList) {
+<span class="fc" id="L13">		super();</span>
+<span class="fc" id="L14">		this.categoryId = categoryId;</span>
+<span class="fc" id="L15">		this.categoryName = categoryName;</span>
+<span class="fc" id="L16">		this.productList = productList;</span>
+<span class="fc" id="L17">	}</span>
+	public CategoryDto() {
+<span class="fc" id="L19">		super();</span>
+<span class="fc" id="L20">	}</span>
+	public int getCategoryId() {
+<span class="nc" id="L22">		return categoryId;</span>
+	}
+	public void setCategoryId(int categoryId) {
+<span class="fc" id="L25">		this.categoryId = categoryId;</span>
+<span class="fc" id="L26">	}</span>
+	public String getCategoryName() {
+<span class="nc" id="L28">		return categoryName;</span>
+	}
+	public void setCategoryName(String categoryName) {
+<span class="fc" id="L31">		this.categoryName = categoryName;</span>
+<span class="fc" id="L32">	}</span>
+	public List&lt;ProductDto&gt; getProductList() {
+<span class="nc" id="L34">		return productList;</span>
+	}
+	public void setProductList(List&lt;ProductDto&gt; productList) {
+<span class="fc" id="L37">		this.productList = productList;</span>
+<span class="fc" id="L38">	}</span>
+	@Override
+	public int hashCode() {
+<span class="nc" id="L41">		final int prime = 31;</span>
+<span class="nc" id="L42">		int result = 1;</span>
+<span class="nc" id="L43">		result = prime * result + categoryId;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">		result = prime * result + ((categoryName == null) ? 0 : categoryName.hashCode());</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">		result = prime * result + ((productList == null) ? 0 : productList.hashCode());</span>
+<span class="nc" id="L46">		return result;</span>
+	}
+	@Override
+	public boolean equals(Object obj) {
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L51">			return true;</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L53">			return false;</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L55">			return false;</span>
+<span class="fc" id="L56">		CategoryDto other = (CategoryDto) obj;</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">		if (categoryId != other.categoryId)</span>
+<span class="nc" id="L58">			return false;</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">		if (categoryName == null) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">			if (other.categoryName != null)</span>
+<span class="nc" id="L61">				return false;</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">		} else if (!categoryName.equals(other.categoryName))</span>
+<span class="nc" id="L63">			return false;</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">		if (productList == null) {</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">			if (other.productList != null)</span>
+<span class="nc" id="L66">				return false;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">		} else if (!productList.equals(other.productList))</span>
+<span class="nc" id="L68">			return false;</span>
+<span class="fc" id="L69">		return true;</span>
+	}
+		
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

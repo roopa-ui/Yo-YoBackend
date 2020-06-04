@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FeedBack.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.entity</a> &gt; <span class="el_source">FeedBack.java</span></div><h1>FeedBack.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
+public class FeedBack {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int feedbackId;
+	private int feedbackStarRating;
+	private String feedbackComment;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Product product;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
+
+	public FeedBack(int feedbackId, int feedbackStarRating, String feedbackComment, Product product) {
+<span class="fc" id="L24">		super();</span>
+<span class="fc" id="L25">	}</span>
+
+<span class="fc" id="L27">	public FeedBack(int feedbackId, int feedbackStarRating, String feedbackComment, Product product, User user) {</span>
+<span class="fc" id="L28">		this.feedbackId = feedbackId;</span>
+<span class="fc" id="L29">		this.feedbackStarRating = feedbackStarRating;</span>
+<span class="fc" id="L30">		this.feedbackComment = feedbackComment;</span>
+<span class="fc" id="L31">		this.product = product;</span>
+<span class="fc" id="L32">		this.user = user;</span>
+<span class="fc" id="L33">	}</span>
+
+	public User getUser() {
+<span class="fc" id="L36">		return user;</span>
+	}
+
+	public void setUser(User user) {
+<span class="fc" id="L40">		this.user = user;</span>
+<span class="fc" id="L41">	}</span>
+
+	public FeedBack() {
+<span class="fc" id="L44">		super();</span>
+<span class="fc" id="L45">	}</span>
+
+	public int getFeedbackId() {
+<span class="fc" id="L48">		return feedbackId;</span>
+	}
+
+	public void setFeedbackId(int feedbackId) {
+<span class="fc" id="L52">		this.feedbackId = feedbackId;</span>
+<span class="fc" id="L53">	}</span>
+
+	public int getFeedbackStarRating() {
+<span class="fc" id="L56">		return feedbackStarRating;</span>
+	}
+
+	public void setFeedbackStarRating(int feedbackStarRating) {
+<span class="fc" id="L60">		this.feedbackStarRating = feedbackStarRating;</span>
+<span class="fc" id="L61">	}</span>
+
+	public String getFeedbackComment() {
+<span class="fc" id="L64">		return feedbackComment;</span>
+	}
+
+	public void setFeedbackComment(String feedbackComment) {
+<span class="fc" id="L68">		this.feedbackComment = feedbackComment;</span>
+<span class="fc" id="L69">	}</span>
+
+	public Product getProduct() {
+<span class="fc" id="L72">		return product;</span>
+	}
+
+	public void setProduct(Product product) {
+<span class="fc" id="L76">		this.product = product;</span>
+<span class="fc" id="L77">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L81">		final int prime = 31;</span>
+<span class="nc" id="L82">		int result = 1;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		result = prime * result + ((feedbackComment == null) ? 0 : feedbackComment.hashCode());</span>
+<span class="nc" id="L84">		result = prime * result + feedbackId;</span>
+<span class="nc" id="L85">		result = prime * result + feedbackStarRating;</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		result = prime * result + ((product == null) ? 0 : product.hashCode());</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		result = prime * result + ((user == null) ? 0 : user.hashCode());</span>
+<span class="nc" id="L88">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L94">			return true;</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L96">			return false;</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L98">			return false;</span>
+<span class="fc" id="L99">		FeedBack other = (FeedBack) obj;</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">		if (feedbackComment == null) {</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">			if (other.feedbackComment != null)</span>
+<span class="nc" id="L102">				return false;</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">		} else if (!feedbackComment.equals(other.feedbackComment))</span>
+<span class="nc" id="L104">			return false;</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">		if (feedbackId != other.feedbackId)</span>
+<span class="nc" id="L106">			return false;</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">		if (feedbackStarRating != other.feedbackStarRating)</span>
+<span class="nc" id="L108">			return false;</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">		if (product == null) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">			if (other.product != null)</span>
+<span class="nc" id="L111">				return false;</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">		} else if (!product.equals(other.product))</span>
+<span class="nc" id="L113">			return false;</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">		if (user == null) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">			if (other.user != null)</span>
+<span class="nc" id="L116">				return false;</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">		} else if (!user.equals(other.user))</span>
+<span class="nc" id="L118">			return false;</span>
+<span class="fc" id="L119">		return true;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

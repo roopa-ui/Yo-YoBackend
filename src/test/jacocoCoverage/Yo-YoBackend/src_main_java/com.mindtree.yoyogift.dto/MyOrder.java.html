@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MyOrder.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.dto</a> &gt; <span class="el_source">MyOrder.java</span></div><h1>MyOrder.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.dto;
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mindtree.yoyogift.entity.FeedBack;
+
+public class MyOrder {
+
+	private int orderId;
+	private LocalDate orderDate;
+
+	private int productId;
+	private String productImage;
+	private String productName;
+	private int productPrice;
+
+	public int getProductId() {
+<span class="nc" id="L19">		return productId;</span>
+	}
+
+	public void setProductId(int productId) {
+<span class="fc" id="L23">		this.productId = productId;</span>
+<span class="fc" id="L24">	}</span>
+
+	public String getProductImage() {
+<span class="nc" id="L27">		return productImage;</span>
+	}
+
+	public void setProductImage(String productImage) {
+<span class="fc" id="L31">		this.productImage = productImage;</span>
+<span class="fc" id="L32">	}</span>
+
+	public String getProductName() {
+<span class="nc" id="L35">		return productName;</span>
+	}
+
+	public void setProductName(String productName) {
+<span class="fc" id="L39">		this.productName = productName;</span>
+<span class="fc" id="L40">	}</span>
+
+	public int getProductPrice() {
+<span class="nc" id="L43">		return productPrice;</span>
+	}
+
+	public void setProductPrice(int productPrice) {
+<span class="fc" id="L47">		this.productPrice = productPrice;</span>
+<span class="fc" id="L48">	}</span>
+
+	public String getSentTo() {
+<span class="nc" id="L51">		return sentTo;</span>
+	}
+
+	public void setSentTo(String sentTo) {
+<span class="fc" id="L55">		this.sentTo = sentTo;</span>
+<span class="fc" id="L56">	}</span>
+
+	
+	private FeedBackDto feedback;
+	private String sentTo;
+
+	public int getOrderId() {
+<span class="nc" id="L63">		return orderId;</span>
+	}
+
+	public void setOrderId(int orderId) {
+<span class="fc" id="L67">		this.orderId = orderId;</span>
+<span class="fc" id="L68">	}</span>
+
+	public LocalDate getOrderDate() {
+<span class="nc" id="L71">		return orderDate;</span>
+	}
+
+	public void setOrderDate(LocalDate Date) {
+<span class="fc" id="L75">		this.orderDate = Date;</span>
+<span class="fc" id="L76">	}</span>
+
+	public FeedBackDto getFeedback() {
+<span class="nc" id="L79">		return feedback;</span>
+	}
+
+	public void setFeedback(FeedBackDto feedback) {
+<span class="fc" id="L83">		this.feedback = feedback;</span>
+<span class="fc" id="L84">	}</span>
+
+	public MyOrder(int orderId, LocalDate orderDate, int productId, String productImage, String productName,
+			int productPrice, FeedBackDto feedback, String sentTo) {
+<span class="fc" id="L88">		super();</span>
+<span class="fc" id="L89">		this.orderId = orderId;</span>
+<span class="fc" id="L90">		this.orderDate = orderDate;</span>
+<span class="fc" id="L91">		this.productId = productId;</span>
+<span class="fc" id="L92">		this.productImage = productImage;</span>
+<span class="fc" id="L93">		this.productName = productName;</span>
+<span class="fc" id="L94">		this.productPrice = productPrice;</span>
+<span class="fc" id="L95">		this.feedback = feedback;</span>
+<span class="fc" id="L96">		this.sentTo = sentTo;</span>
+<span class="fc" id="L97">	}</span>
+
+<span class="fc" id="L99">	public MyOrder() {</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L101">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L105">		final int prime = 31;</span>
+<span class="nc" id="L106">		int result = 1;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		result = prime * result + ((feedback == null) ? 0 : feedback.hashCode());</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());</span>
+<span class="nc" id="L109">		result = prime * result + orderId;</span>
+<span class="nc" id="L110">		result = prime * result + productId;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">		result = prime * result + ((productImage == null) ? 0 : productImage.hashCode());</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">		result = prime * result + ((productName == null) ? 0 : productName.hashCode());</span>
+<span class="nc" id="L113">		result = prime * result + productPrice;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">		result = prime * result + ((sentTo == null) ? 0 : sentTo.hashCode());</span>
+<span class="nc" id="L115">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L121">			return true;</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L123">			return false;</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L125">			return false;</span>
+<span class="fc" id="L126">		MyOrder other = (MyOrder) obj;</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">		if (feedback == null) {</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">			if (other.feedback != null)</span>
+<span class="nc" id="L129">				return false;</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">		} else if (!feedback.equals(other.feedback))</span>
+<span class="nc" id="L131">			return false;</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">		if (orderDate == null) {</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">			if (other.orderDate != null)</span>
+<span class="nc" id="L134">				return false;</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">		} else if (!orderDate.equals(other.orderDate))</span>
+<span class="nc" id="L136">			return false;</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">		if (orderId != other.orderId)</span>
+<span class="nc" id="L138">			return false;</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">		if (productId != other.productId)</span>
+<span class="nc" id="L140">			return false;</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">		if (productImage == null) {</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">			if (other.productImage != null)</span>
+<span class="nc" id="L143">				return false;</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">		} else if (!productImage.equals(other.productImage))</span>
+<span class="nc" id="L145">			return false;</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">		if (productName == null) {</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">			if (other.productName != null)</span>
+<span class="nc" id="L148">				return false;</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">		} else if (!productName.equals(other.productName))</span>
+<span class="nc" id="L150">			return false;</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">		if (productPrice != other.productPrice)</span>
+<span class="nc" id="L152">			return false;</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">		if (sentTo == null) {</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">			if (other.sentTo != null)</span>
+<span class="nc" id="L155">				return false;</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">		} else if (!sentTo.equals(other.sentTo))</span>
+<span class="nc" id="L157">			return false;</span>
+<span class="fc" id="L158">		return true;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L163">		return &quot;MyOrder [orderId=&quot; + orderId + &quot;, orderDate=&quot; + orderDate + &quot;, productId=&quot; + productId</span>
+<span class="fc" id="L164">				+ &quot;, productImage=&quot; + productImage + &quot;, productName=&quot; + productName + &quot;, productPrice=&quot; + productPrice</span>
+<span class="fc" id="L165">				+ &quot;, feedback=&quot; + feedback + &quot;, sentTo=&quot; + sentTo + &quot;]&quot;;</span>
+	}
+
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

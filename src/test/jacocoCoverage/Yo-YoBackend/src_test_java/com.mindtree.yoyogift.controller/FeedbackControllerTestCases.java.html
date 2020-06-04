@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FeedbackControllerTestCases.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.controller</a> &gt; <span class="el_source">FeedbackControllerTestCases.java</span></div><h1>FeedbackControllerTestCases.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.controller;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mindtree.yoyogift.dto.FeedBackDto;
+import com.mindtree.yoyogift.dto.ProductDto;
+import com.mindtree.yoyogift.dto.UserDto;
+import com.mindtree.yoyogift.service.FeedbackService;
+@RunWith(MockitoJUnitRunner.Silent.class)
+@WebMvcTest(FeedBackController.class)
+<span class="fc" id="L29">public class FeedbackControllerTestCases {</span>
+	
+	@InjectMocks
+	private FeedBackController feedbackController;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Mock
+	private FeedbackService feedbackService;
+	public static String asJsonString(final Object obj) {
+		try {
+<span class="fc" id="L41">			return new ObjectMapper().writeValueAsString(obj);</span>
+<span class="nc" id="L42">		} catch (JsonProcessingException e) {</span>
+<span class="nc" id="L43">			throw new RuntimeException();</span>
+		}
+
+	}
+	@Before
+	public void setup() {
+<span class="fc" id="L49">		this.mockMvc = MockMvcBuilders.standaloneSetup(feedbackController).build();</span>
+<span class="fc" id="L50">	}</span>
+	
+
+
+	@Test
+	public void testGetFeedback() throws Exception {
+<span class="fc" id="L56">		List&lt;FeedBackDto&gt; feedback = new ArrayList&lt;FeedBackDto&gt;();</span>
+<span class="fc" id="L57">		feedback.add(new FeedBackDto(1,5,&quot;good&quot;,null,null));</span>
+		
+<span class="fc" id="L59">		when(feedbackService.getFeedback()).thenReturn(feedback);</span>
+<span class="fc" id="L60">		mockMvc.perform(MockMvcRequestBuilders.get(&quot;/feedback/getfeedback&quot;)</span>
+<span class="fc" id="L61">				.accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());</span>
+		
+<span class="fc" id="L63">	}</span>
+
+	@Test
+	public void testAddFeedback() throws Exception {
+		
+<span class="fc" id="L68">		String userEmail = &quot;gayathri@gmail.com&quot;;</span>
+		
+<span class="fc" id="L70">		UserDto userDto = new UserDto(1, &quot;gayathri&quot;, &quot;gayathri@gmail.com&quot;, &quot;gayathri1234&quot;, 300);</span>
+<span class="fc" id="L71">		ProductDto product = new ProductDto(1, &quot;dress&quot;, 100, &quot;jeans&quot;, &quot;wrangler&quot;, &quot;abc.jpeg&quot;, null, null);</span>
+<span class="fc" id="L72">		FeedBackDto feedback = new FeedBackDto(1,2,&quot;good&quot;,product,userDto);</span>
+		
+<span class="fc" id="L74">		when(feedbackService.addFeedback(feedback,product.getProductId(),userEmail)).thenReturn(feedback);</span>
+<span class="fc" id="L75">		mockMvc.perform(MockMvcRequestBuilders.post(&quot;/feedback/addfeedback/1/userEmail&quot;)</span>
+<span class="fc" id="L76">				.contentType(MediaType.APPLICATION_JSON)</span>
+<span class="fc" id="L77">				.content(asJsonString(feedback)).accept(MediaType.APPLICATION_JSON))</span>
+<span class="fc" id="L78">				.andExpect(MockMvcResultMatchers.status().isOk());</span>
+		
+<span class="fc" id="L80">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

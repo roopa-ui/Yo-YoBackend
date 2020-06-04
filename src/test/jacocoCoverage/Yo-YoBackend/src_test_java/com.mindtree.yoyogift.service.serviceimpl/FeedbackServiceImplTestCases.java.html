@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FeedbackServiceImplTestCases.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.service.serviceimpl</a> &gt; <span class="el_source">FeedbackServiceImplTestCases.java</span></div><h1>FeedbackServiceImplTestCases.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.service.serviceimpl;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
+import com.mindtree.yoyogift.dto.FeedBackDto;
+import com.mindtree.yoyogift.dto.ProductDto;
+import com.mindtree.yoyogift.dto.UserDto;
+import com.mindtree.yoyogift.entity.FeedBack;
+import com.mindtree.yoyogift.entity.Product;
+import com.mindtree.yoyogift.entity.User;
+import com.mindtree.yoyogift.repository.FeedBackRepository;
+import com.mindtree.yoyogift.repository.ProductRepository;
+import com.mindtree.yoyogift.repository.UserRepository;
+
+@RunWith(MockitoJUnitRunner.class)
+@WebMvcTest(FeedbackServiceImpl.class)
+<span class="fc" id="L33">public class FeedbackServiceImplTestCases {</span>
+
+//	@TestConfiguration
+//	public static class Config {
+//		@Bean
+//		public FeedbackService feedbackService() {
+//			return new FeedbackServiceImpl();
+//		}
+//	}
+
+	@InjectMocks
+	FeedbackServiceImpl feedbackServiceImpl;
+
+//	@Autowired
+//	FeedbackService feedbackService;
+//	
+	@Mock
+	FeedBackRepository feedbackRepository;
+
+	@Mock
+	ProductRepository productRepository;
+
+	@Mock
+	UserRepository userRepository;
+
+	@Test
+	public void testGetFeedback() {
+
+<span class="fc" id="L61">		List&lt;FeedBack&gt; feedbackList = new ArrayList&lt;FeedBack&gt;();</span>
+<span class="fc" id="L62">		List&lt;FeedBackDto&gt; feedbackDtoList = new ArrayList&lt;FeedBackDto&gt;();</span>
+<span class="fc" id="L63">		User user = new User(1, &quot;raj&quot;, &quot;abc&quot;, &quot;cdcs&quot;, 2344);</span>
+<span class="fc" id="L64">		UserDto userDto = new UserDto(1, &quot;raj&quot;, &quot;abc&quot;, &quot;cdcs&quot;, 2344);</span>
+<span class="fc" id="L65">		Product product = new Product(1, &quot;soap&quot;, 200, &quot;fddsaf&quot;, &quot;sdfsaf&quot;, &quot;dsafdg&quot;, null, null);</span>
+<span class="fc" id="L66">		ProductDto productDto = new ProductDto(1, &quot;soap&quot;, 200, &quot;fddsaf&quot;, &quot;sdfsaf&quot;, &quot;dsafdg&quot;, null, null);</span>
+<span class="fc" id="L67">		feedbackList.add(new FeedBack(1, 5, &quot;good&quot;, product, user));</span>
+<span class="fc" id="L68">		feedbackDtoList.add(new FeedBackDto(1, 5, &quot;good&quot;, productDto, userDto));</span>
+<span class="fc" id="L69">		when(feedbackRepository.findAll()).thenReturn(feedbackList);</span>
+<span class="fc" id="L70">		assertThat(feedbackServiceImpl.getFeedback(), contains(hasProperty(&quot;feedbackStarRating&quot;, is(5))));</span>
+<span class="fc" id="L71">	}</span>
+
+	@Test
+	public void testAddFeedbackIfExists() {
+
+<span class="fc" id="L76">		User user = new User(1, &quot;raj&quot;, &quot;abc&quot;, &quot;cdcs&quot;, 2344);</span>
+<span class="fc" id="L77">		UserDto userDto = new UserDto(1, &quot;raj&quot;, &quot;abc&quot;, &quot;cdcs&quot;, 2344);</span>
+<span class="fc" id="L78">		Product product = new Product(1, &quot;soap&quot;, 200, &quot;fddsaf&quot;, &quot;sdfsaf&quot;, &quot;dsafdg&quot;, null, null);</span>
+<span class="fc" id="L79">		ProductDto productDto = new ProductDto(1, &quot;soap&quot;, 200, &quot;fddsaf&quot;, &quot;sdfsaf&quot;, &quot;dsafdg&quot;, null, null);</span>
+<span class="fc" id="L80">		FeedBack feedback = new FeedBack(1, 5, &quot;good&quot;, product, user);</span>
+<span class="fc" id="L81">		FeedBackDto newfeedback = new FeedBackDto(1, 4, &quot;not bad&quot;, productDto, userDto);</span>
+<span class="fc" id="L82">		when(productRepository.findById(1)).thenReturn(Optional.of(product));</span>
+<span class="fc" id="L83">		when(userRepository.findByMailId(&quot;abc&quot;)).thenReturn(user);</span>
+<span class="fc" id="L84">		when(feedbackRepository.getUserFeedback(&quot;abc&quot;, 1)).thenReturn(Optional.of(feedback));</span>
+<span class="fc" id="L85">		when((feedbackRepository.saveAndFlush(feedback))).thenReturn(feedback);</span>
+	
+<span class="fc" id="L87">		assertEquals(newfeedback, (feedbackServiceImpl.addFeedback(newfeedback, 1, &quot;abc&quot;)));</span>
+<span class="fc" id="L88">	}</span>
+
+	@Test
+	public void testAddFeedbackIfNotExists() {
+<span class="fc" id="L92">		User user = new User(1, &quot;raj&quot;, &quot;abc&quot;, &quot;cdcs&quot;, 2344);</span>
+<span class="fc" id="L93">		UserDto userDto = new UserDto(1, &quot;raj&quot;, &quot;abc&quot;, &quot;cdcs&quot;, 2344);</span>
+<span class="fc" id="L94">		Product product = new Product(1, &quot;soap&quot;, 200, &quot;fddsaf&quot;, &quot;sdfsaf&quot;, &quot;dsafdg&quot;, null, null);</span>
+<span class="fc" id="L95">		ProductDto productDto = new ProductDto(1, &quot;soap&quot;, 200, &quot;fddsaf&quot;, &quot;sdfsaf&quot;, &quot;dsafdg&quot;, null, null);</span>
+<span class="fc" id="L96">		FeedBack feedback = new FeedBack(1, 5, &quot;good&quot;, product, user);</span>
+<span class="fc" id="L97">		FeedBackDto newfeedback = new FeedBackDto(1, 5, &quot;good&quot;, productDto, userDto);</span>
+
+<span class="fc" id="L99">		when(productRepository.findById(1)).thenReturn(Optional.of(product));</span>
+<span class="fc" id="L100">		when(userRepository.findByMailId(&quot;abc&quot;)).thenReturn(user);</span>
+<span class="fc" id="L101">		when(feedbackRepository.getUserFeedback(&quot;abc&quot;, 1)).thenReturn(Optional.empty());</span>
+		
+
+<span class="fc" id="L104">		when(feedbackRepository.save(feedback)).thenReturn(feedback);</span>
+//		System.out.println(newfeedback);
+//		System.out.println(feedbackServiceImpl.addFeedback(newfeedback, 1, &quot;abc&quot;));
+<span class="fc" id="L107">		assertEquals(newfeedback, (feedbackServiceImpl.addFeedback(newfeedback, 1, &quot;abc&quot;)));</span>
+<span class="fc" id="L108">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>

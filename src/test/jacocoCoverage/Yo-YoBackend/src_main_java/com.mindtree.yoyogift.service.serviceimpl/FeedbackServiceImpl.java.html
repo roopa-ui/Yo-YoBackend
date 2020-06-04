@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FeedbackServiceImpl.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</a> &gt; <a href="../../index.html" class="el_group">Yo-YoBackend</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mindtree.yoyogift.service.serviceimpl</a> &gt; <span class="el_source">FeedbackServiceImpl.java</span></div><h1>FeedbackServiceImpl.java</h1><pre class="source lang-java linenums">package com.mindtree.yoyogift.service.serviceimpl;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.mindtree.yoyogift.dto.FeedBackDto;
+import com.mindtree.yoyogift.entity.FeedBack;
+import com.mindtree.yoyogift.entity.Product;
+import com.mindtree.yoyogift.entity.User;
+import com.mindtree.yoyogift.repository.FeedBackRepository;
+import com.mindtree.yoyogift.repository.ProductRepository;
+import com.mindtree.yoyogift.repository.UserRepository;
+import com.mindtree.yoyogift.service.FeedbackService;
+
+@Service
+<span class="fc" id="L19">public class FeedbackServiceImpl implements FeedbackService {</span>
+
+	@Autowired
+	FeedBackRepository feedbackRepository;
+
+	@Autowired
+	ProductRepository productRepository;
+
+	@Autowired
+	UserRepository userRepository;
+
+<span class="fc" id="L30">	private ModelMapper modelMapper = new ModelMapper();</span>
+
+	@Override
+	public List&lt;FeedBackDto&gt; getFeedback() {
+<span class="fc" id="L34">		List&lt;FeedBack&gt; feedback = feedbackRepository.findAll();</span>
+<span class="fc" id="L35">		List&lt;FeedBackDto&gt; feedbacks = feedback.stream().map(entity -&gt; convertEntityToDto(entity))</span>
+<span class="fc" id="L36">				.collect(Collectors.toList());</span>
+<span class="fc" id="L37">		return feedbacks;</span>
+	}
+	@Override
+	public FeedBackDto addFeedback(FeedBackDto feedback, int productId, String mailId) {
+<span class="fc" id="L41">		Product product = productRepository.findById(productId).get();</span>
+<span class="fc" id="L42">		User user = userRepository.findByMailId(mailId);</span>
+<span class="fc" id="L43">		FeedBack feedbacks = convertDtoToEntity(feedback);</span>
+<span class="fc" id="L44">		Optional&lt;FeedBack&gt; feedbackExists = feedbackRepository.getUserFeedback(mailId, productId);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		if (feedbackExists.isPresent()) {</span>
+<span class="fc" id="L46">			feedbackExists.get().setFeedbackStarRating(feedbacks.getFeedbackStarRating());</span>
+<span class="fc" id="L47">			feedbackExists.get().setFeedbackComment(feedbacks.getFeedbackComment());</span>
+<span class="fc" id="L48">			return convertEntityToDto(feedbackRepository.saveAndFlush(feedbackExists.get()));</span>
+		} else {
+<span class="fc" id="L50">			feedbacks.setProduct(product);</span>
+<span class="fc" id="L51">			feedbacks.setUser(user);</span>
+<span class="fc" id="L52">			return convertEntityToDto(feedbackRepository.save(feedbacks));</span>
+			
+		}
+
+	}
+
+	private FeedBackDto convertEntityToDto(FeedBack feedback) {
+<span class="fc" id="L59">		return modelMapper.map(feedback, FeedBackDto.class);</span>
+
+	}
+
+	private FeedBack convertDtoToEntity(FeedBackDto feedback) {
+<span class="fc" id="L64">		return modelMapper.map(feedback, FeedBack.class);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Yo-YoBackend (Jan 4, 2020 5:17:57 PM)</div></body></html>
